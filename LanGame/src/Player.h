@@ -15,7 +15,7 @@ class Player
         std::string m_name;
         int m_lives;
         int m_color;
-        Racket M_racket;
+        Racket m_racket;
 };
 
 #endif

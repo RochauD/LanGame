@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <new>
 #include <SFML\Graphics.hpp>
 
 struct TextureData
@@ -29,7 +30,7 @@ class TextureManager
     protected:
     private:
         std::unordered_map<std::string, TextureData> m_textureContainer;
-        std::string texturePath;
+        std::string m_texturePath;
 };
 
 #endif

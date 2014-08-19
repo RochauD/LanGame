@@ -3,12 +3,12 @@
 
 TextureManager::TextureManager(const std::string &texturePath)
 {
-    this->texturePath = texturePath;
+    this->m_texturePath = texturePath;
 }
 
 TextureManager::TextureManager(const char* texturePath)
 {
-    this->texturePath = texturePath;
+    this->m_texturePath = texturePath;
 }
 
 TextureManager::~TextureManager()
@@ -23,7 +23,7 @@ bool TextureManager::LoadTextures(std::vector<std::pair<std::string, bool>> &str
     for (iter = stringVector.begin(); iter != stringVector.end(); iter++)
     {
         sf::Texture* tempTexture = new sf::Texture;
-        if (!tempTexture->loadFromFile(this->texturePath + iter->first))
+        if (!tempTexture->loadFromFile(this->m_texturePath + iter->first))
         {
             if (tempTexture)
             {
@@ -46,7 +46,7 @@ bool TextureManager::LoadTextures(std::vector<std::string> &stringVector, bool p
     for (iter = stringVector.begin(); iter != stringVector.end(); iter++)
     {
         sf::Texture* tempTexture = new sf::Texture;
-        if (!tempTexture->loadFromFile(this->texturePath + *iter))
+        if (!tempTexture->loadFromFile(this->m_texturePath + *iter))
         {
             if (tempTexture)
             {
@@ -60,6 +60,7 @@ bool TextureManager::LoadTextures(std::vector<std::string> &stringVector, bool p
         tempTextureData.persistent = persistent;
         this->m_textureContainer.insert(std::pair<std::string, TextureData>(*iter, tempTextureData));
     }
+    return true;
 }
 
 bool TextureManager::GetTexture(const std::string &filename, sf::Texture** parTexture, const bool persistent)
@@ -80,7 +81,7 @@ bool TextureManager::GetTexture(const std::string &filename, sf::Texture** parTe
         try
         {
             sf::Texture* tempTexture = new sf::Texture;
-            if (!tempTexture->loadFromFile(this->texturePath + filename))
+            if (!tempTexture->loadFromFile(this->m_texturePath + filename))
             {
                 if (tempTexture)
                 {
@@ -97,6 +98,7 @@ bool TextureManager::GetTexture(const std::string &filename, sf::Texture** parTe
         }
         catch (std::bad_alloc &ba)
         {
+            ba.what(); //@todo add log entry
             return false;
         }
     }

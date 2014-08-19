@@ -4,6 +4,7 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 
+class SpriteManager;
 
 class StaticSprite : sf::Sprite
 {
@@ -18,6 +19,8 @@ class StaticSprite : sf::Sprite
     private:
         std::string m_textureName;
 
+        //static
+        static SpriteManager s_spriteManager;
 };
 
 

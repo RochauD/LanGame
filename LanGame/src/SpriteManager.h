@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "StaticSprite.h"
 
 class TextureManager;
 
@@ -15,13 +16,13 @@ class SpriteManager
         SpriteManager &operator=(const SpriteManager &) = delete; // non copyable
         ~SpriteManager();
 
-        bool AddSprite(T* sprite);
-        bool RemoveSprite(T* sprite);
+        bool AddSprite(StaticSprite* sprite);
+        bool RemoveSprite(StaticSprite* sprite);
 
     protected:
     private:
-        TextureManager* textureManager;
-        std::vector<T> spriteArray;
+        TextureManager* m_textureManager;
+        std::vector<StaticSprite> m_spriteArray;
 };
 
 #endif

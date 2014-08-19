@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include <SFML\Graphics.hpp>
 #include "TextureManager.h"
 
 #include <functional>
@@ -18,9 +18,7 @@ int main()
     testSprite.setTexture(*testTexPt);
     testSprite.setPosition(0, 0);
 
-    std::hash<std::string> x;
 
-    size_t ubt= x(std::string("abs"));
 
     while (window.isOpen())
     {
