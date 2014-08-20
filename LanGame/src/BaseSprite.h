@@ -11,13 +11,14 @@ class BaseSprite : public sf::Sprite
 {
     public:
         BaseSprite();
-        BaseSprite(sf::Texture texture, bool show = true);
         BaseSprite(std::string filename, bool show = true);
         ~BaseSprite();
 
         std::string GetTextureName();
         void SetTextureName(const std::string &textureName);
         void Show(bool showFlag = true);
+        void SetTexture(std::string &filename);
+        void setTexture(const sf::Texture &texture, bool resetRect = false) = delete;
 
         //static
         static void SetSpriteManager(SpriteManager* spriteManager);

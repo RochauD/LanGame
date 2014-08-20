@@ -9,6 +9,7 @@
 
 class TextureManager;
 class BaseSprite;
+class AnimSprite;
 
 class SpriteManager
 {
@@ -21,13 +22,19 @@ class SpriteManager
 
         void AddSprite(BaseSprite* sprite);
         void RemoveSprite(BaseSprite* sprite);
+        void AddSprite(AnimSprite* sprite);
+        void RemoveSprite(AnimSprite* sprite);
         void DrawSprites();
 
     protected:
     private:
+        void DrawBaseSprites();
+        void DrawAnimSprites();
+
         sf::RenderWindow* m_renderWindow;
         std::unique_ptr<TextureManager> m_textureManager;
-        std::vector<BaseSprite*> m_staticSpriteDrawVec;
+        std::vector<BaseSprite*> m_baseSpriteVec;
+        std::vector<AnimSprite*> m_animSpriteVec;
 };
 
 #endif

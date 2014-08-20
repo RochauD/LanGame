@@ -1,7 +1,7 @@
 #include <SFML\Graphics.hpp>
 #include "SpriteManager.h"
 #include "BaseSprite.h"
-
+#include "AnimSprite.h"
 
 int main()
 {
@@ -13,8 +13,11 @@ int main()
 
     BaseSprite testSprite("bild1.png");
     testSprite.setPosition(0, 0);
-
-
+    AnimSprite test2("bild2.png", true, 3,4, sf::milliseconds(1000/24), false, true);
+    AnimSprite test3("bild3.png", true, 2, 4, sf::milliseconds(50), false, true);
+    test3.setPosition(50, 50);
+    AnimSprite test4("bild4.png", true, 5, 6, sf::milliseconds(50), false, true);
+    test4.setPosition(500, 400);
 
     while (window.isOpen())
     {

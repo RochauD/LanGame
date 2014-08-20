@@ -6,17 +6,13 @@ BaseSprite::BaseSprite() : sf::Sprite()
 {
 
 }
-BaseSprite::BaseSprite(sf::Texture texture, bool show) : sf::Sprite(texture)
-{
-    this->m_visibilityFlag = show;
-}
 BaseSprite::BaseSprite(std::string filename, bool show) : sf::Sprite()
 {
     sf::Texture* bufferTexturePtr = 0;
     this->m_textureName = filename;
     this->m_visibilityFlag = show;
     s_textureManager->GetTexture(this->m_textureName, &bufferTexturePtr); // @todo add exception
-    this->setTexture(*bufferTexturePtr, true);
+    sf::Sprite::setTexture(*bufferTexturePtr, true);
     s_spriteManager->AddSprite(this);
 }
 BaseSprite::~BaseSprite()
@@ -49,6 +45,13 @@ void BaseSprite::Show(bool showFlag)
         }
         this->m_visibilityFlag = showFlag;
     }
+}
+
+void BaseSprite::SetTexture(std::string &filename)
+{
+    sf::Texture* bufferTexturePtr = 0;
+    s_textureManager->GetTexture(this->m_textureName, &bufferTexturePtr); // @todo add exception
+    sf::Sprite::setTexture(*bufferTexturePtr, true);
 }
 
 //static
