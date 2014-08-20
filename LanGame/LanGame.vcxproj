@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AnimSprite.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Racket.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AnimSprite.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Racket.h" />
     <ClInclude Include="src\SpriteManager.h" />
