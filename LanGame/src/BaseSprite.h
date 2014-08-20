@@ -1,5 +1,5 @@
-#ifndef STATICSPRITE_H_
-#define STATICSPRITE_H_
+#ifndef BASESPRITE_H_
+#define BASESPRITE_H_
 
 #include <string>
 #include <SFML\Graphics.hpp>
@@ -7,13 +7,13 @@
 class SpriteManager;
 class TextureManager;
 
-class StaticSprite : public sf::Sprite
+class BaseSprite : public sf::Sprite
 {
     public:
-        StaticSprite();
-        StaticSprite(sf::Texture texture, bool show = true);
-        StaticSprite(std::string filename, bool show = true);
-        ~StaticSprite();
+        BaseSprite();
+        BaseSprite(sf::Texture texture, bool show = true);
+        BaseSprite(std::string filename, bool show = true);
+        ~BaseSprite();
 
         std::string GetTextureName();
         void SetTextureName(const std::string &textureName);
@@ -32,8 +32,4 @@ class StaticSprite : public sf::Sprite
         static TextureManager* s_textureManager;
 };
 
-
-
-
 #endif
-

@@ -8,7 +8,7 @@
 #include <SFML\Graphics.hpp>
 
 class TextureManager;
-class StaticSprite;
+class BaseSprite;
 
 class SpriteManager
 {
@@ -19,15 +19,15 @@ class SpriteManager
         SpriteManager &operator=(const SpriteManager &) = delete; // non copyable
         ~SpriteManager();
 
-        void AddSprite(StaticSprite* sprite);
-        void RemoveSprite(StaticSprite* sprite);
+        void AddSprite(BaseSprite* sprite);
+        void RemoveSprite(BaseSprite* sprite);
         void DrawSprites();
 
     protected:
     private:
         sf::RenderWindow* m_renderWindow;
         std::unique_ptr<TextureManager> m_textureManager;
-        std::vector<StaticSprite*> m_staticSpriteDrawVec;
+        std::vector<BaseSprite*> m_staticSpriteDrawVec;
 };
 
 #endif

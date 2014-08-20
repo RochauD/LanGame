@@ -1,22 +1,22 @@
 #include "SpriteManager.h"
 #include "TextureManager.h"
-#include "StaticSprite.h"
+#include "BaseSprite.h"
 
 
 SpriteManager::SpriteManager(const std::string &texturePath, sf::RenderWindow* renderWindow)
 {
     this->m_textureManager.reset(new TextureManager(texturePath));
     this->m_renderWindow = renderWindow;
-    StaticSprite::SetSpriteManager(this);
-    StaticSprite::SetTextureManager(this->m_textureManager.get());
+    BaseSprite::SetSpriteManager(this);
+    BaseSprite::SetTextureManager(this->m_textureManager.get());
 }
 
 SpriteManager::SpriteManager(const char* texturePath, sf::RenderWindow* renderWindow)
 {
     this->m_textureManager.reset(new TextureManager(texturePath));
     this->m_renderWindow = renderWindow;
-    StaticSprite::SetSpriteManager(this);
-    StaticSprite::SetTextureManager(this->m_textureManager.get());
+    BaseSprite::SetSpriteManager(this);
+    BaseSprite::SetTextureManager(this->m_textureManager.get());
 }
 
 SpriteManager::~SpriteManager()
@@ -24,11 +24,11 @@ SpriteManager::~SpriteManager()
 
 }
 
-void SpriteManager::AddSprite(StaticSprite* sprite)
+void SpriteManager::AddSprite(BaseSprite* sprite)
 {
     this->m_staticSpriteDrawVec.push_back(sprite);
 }
-void SpriteManager::RemoveSprite(StaticSprite* sprite)
+void SpriteManager::RemoveSprite(BaseSprite* sprite)
 {
     auto iter = this->m_staticSpriteDrawVec.begin();
     for (iter; iter != this->m_staticSpriteDrawVec.end(); iter++)

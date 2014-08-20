@@ -1,6 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include "SpriteManager.h"
-#include "StaticSprite.h"
+#include "BaseSprite.h"
 
 
 int main()
@@ -11,7 +11,7 @@ int main()
     SpriteManager mySpManager("", &window);
     bool x = true;
 
-    StaticSprite testSprite("bild1.png");
+    BaseSprite testSprite("bild1.png");
     testSprite.setPosition(0, 0);
 
 
