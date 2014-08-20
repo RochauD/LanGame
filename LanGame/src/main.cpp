@@ -1,7 +1,6 @@
 #include <SFML\Graphics.hpp>
-#include "TextureManager.h"
-
-#include <functional>
+#include "SpriteManager.h"
+#include "StaticSprite.h"
 
 
 int main()
@@ -9,13 +8,10 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000, 900), "SFML works!");
     window.setVerticalSyncEnabled(true);
 
-    TextureManager testManager("");
-    sf::Texture* testTexPt = 0;
-    testManager.GetTexture("bild1.png", &testTexPt);
+    SpriteManager mySpManager("", &window);
+    bool x = true;
 
-
-    sf::Sprite testSprite;
-    testSprite.setTexture(*testTexPt);
+    StaticSprite testSprite("bild1.png");
     testSprite.setPosition(0, 0);
 
 
@@ -31,13 +27,14 @@ int main()
             }
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A)
             {
+                testSprite.Show(x = !x);
 
             }
 
         }
 
         window.clear();
-        window.draw(testSprite);
+        mySpManager.DrawSprites();
         window.display();
     }
 

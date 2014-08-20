@@ -2,28 +2,32 @@
 #define SPRITEMANAGER_H_
 
 #include <vector>
+#include <unordered_set>
 #include <string>
-#include "StaticSprite.h"
+#include <memory>
+#include <SFML\Graphics.hpp>
 
 class TextureManager;
+class StaticSprite;
 
 class SpriteManager
 {
     public:
-        SpriteManager(const std::string &texturePath);
-        SpriteManager(const char* texturePath);
+        SpriteManager(const std::string &texturePath, sf::RenderWindow* renderWindow);
+        SpriteManager(const char* texturePath, sf::RenderWindow* renderWindow);
         SpriteManager(const SpriteManager &other) = delete; // non construction-copyable
         SpriteManager &operator=(const SpriteManager &) = delete; // non copyable
         ~SpriteManager();
 
-        bool AddSprite(StaticSprite* sprite);
-        bool RemoveSprite(StaticSprite* sprite);
+        void AddSprite(StaticSprite* sprite);
+        void RemoveSprite(StaticSprite* sprite);
+        void DrawSprites();
 
     protected:
     private:
-        TextureManager* m_textureManager;
-        std::vector<StaticSprite> m_spriteArray;
+        sf::RenderWindow* m_renderWindow;
+        std::unique_ptr<TextureManager> m_textureManager;
+        std::vector<StaticSprite*> m_staticSpriteDrawVec;
 };
 
 #endif
-

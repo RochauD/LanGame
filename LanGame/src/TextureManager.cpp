@@ -3,11 +3,13 @@
 
 TextureManager::TextureManager(const std::string &texturePath)
 {
+    this->m_textureContainer.reserve(100);
     this->m_texturePath = texturePath;
 }
 
 TextureManager::TextureManager(const char* texturePath)
 {
+    this->m_textureContainer.reserve(100);
     this->m_texturePath = texturePath;
 }
 
@@ -106,23 +108,30 @@ bool TextureManager::GetTexture(const std::string &filename, sf::Texture** parTe
 
 void TextureManager::DeleteTexture(const std::string &filename)
 {
-    std::unordered_map<std::string, TextureData>::iterator iter;
-    if ((iter = this->m_textureContainer.find(filename)) != this->m_textureContainer.end())
+    if (filename.empty() == true)
     {
-        if (iter->second.count == 1 && iter->second.persistent == false)
+        std::unordered_map<std::string, TextureData>::iterator iter;
+        if ((iter = this->m_textureContainer.find(filename)) != this->m_textureContainer.end())
         {
-            if (iter->second.texture)
+            if (iter->second.count == 1 && iter->second.persistent == false)
             {
-                delete iter->second.texture;
-                iter->second.texture = 0;
+                if (iter->second.texture)
+                {
+                    delete iter->second.texture;
+                    iter->second.texture = 0;
+                }
+                iter->second.count = 0;
+                this->m_textureContainer.erase(iter);
             }
-            iter->second.count = 0;
-            this->m_textureContainer.erase(iter);
+            else
+            {
+                iter->second.count--;
+            }
         }
-        else
-        {
-            iter->second.count--;
-        }
+    }
+    else
+    {
+        //trying to delete empty texture ! fail condition
     }
 }
 
