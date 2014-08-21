@@ -4,6 +4,12 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 
+// @todo
+// rewrite base sprite to be a real base for a class AnimSprite and StaticSprite
+// Currently we cannot do this as we inherit from sf::sprite and do not want to
+// implement the basic sprite functionality ourselves. In case that changes fix
+// these classes.
+
 class SpriteManager;
 class TextureManager;
 
