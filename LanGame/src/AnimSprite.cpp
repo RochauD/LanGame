@@ -4,7 +4,7 @@
 
 //constructors & destructors
 
-AnimSprite::AnimSprite() : sf::Sprite()
+AnimSprite::AnimSprite() : BaseSprite()
 {
     this->m_visibilityFlag = false;
     this->m_rows = 1;
@@ -25,11 +25,8 @@ AnimSprite::AnimSprite(const std::string filename,
                        const int framesPerColumn,
                        const sf::Time updateTime,
                        bool paused,
-                       bool looped) : sf::Sprite()
+                       bool looped) : BaseSprite(filename, show)
 {
-    sf::Texture* bufferTexturePtr = 0;
-    this->m_textureName = filename;
-    this->m_visibilityFlag = show;
     this->m_rows = framesPerRow;
     this->m_columns = framesPerColumn;
     this->m_updateTime = updateTime;
@@ -40,9 +37,6 @@ AnimSprite::AnimSprite(const std::string filename,
     this->m_isPaused = paused;
     this->m_isLooped = looped;
     this->m_timer = sf::Clock();
-    s_textureManager->GetTexture(this->m_textureName, &bufferTexturePtr); // @todo add exception
-    sf::Sprite::setTexture(*bufferTexturePtr, true);
-    s_spriteManager->AddSprite(this);
     this->SetFramesGrid(framesPerRow, framesPerColumn);
 }
 
@@ -136,51 +130,18 @@ void AnimSprite::SetFramesGrid(const int framesPerRow, const int framesPerColumn
     this->m_rows = framesPerRow;
     this->m_columns = framesPerColumn;
     this->m_maxFrames = this->m_rows * this->m_columns;
-    this->m_frameSize = sf::Vector2i(this->getTexture()->getSize());
+    this->m_frameSize = sf::Vector2i(this->GetTexture()->getSize());
     this->m_frameSize.x /= this->m_rows;
     this->m_frameSize.y /= this->m_columns;
-    this->setTextureRect(sf::IntRect(sf::Vector2i(0, 0), this->m_frameSize));
+    this->SetTextureRect(sf::IntRect(sf::Vector2i(0, 0), this->m_frameSize));
 }
 
-std::string AnimSprite::GetTextureName()
-{
-    return this->m_textureName;
-}
-
-void AnimSprite::SetTextureName(const std::string &textureName)
-{
-    this->m_textureName = textureName;
-}
-
-void AnimSprite::Show(bool showFlag)
-{
-    if (this->m_visibilityFlag != showFlag)
-    {
-        if (showFlag == true)
-        {
-            s_spriteManager->AddSprite(this);
-        }
-        else
-        {
-            s_spriteManager->RemoveSprite(this);
-        }
-        this->m_visibilityFlag = showFlag;
-    }
-}
-
-void AnimSprite::SetTexture(std::string &filename)
-{
-    sf::Texture* bufferTexturePtr = 0;
-    s_textureManager->GetTexture(this->m_textureName, &bufferTexturePtr); // @todo add exception
-    sf::Sprite::setTexture(*bufferTexturePtr, true);
-    this->SetFramesGrid(this->m_rows, this->m_columns);
-}
 
 //private
 
 void AnimSprite::CalcNextFrame()
 {
-    if (this->m_currentPos.x + 2 * this->m_frameSize.x <= this->getTexture()->getSize().x)
+    if (this->m_currentPos.x + 2 * this->m_frameSize.x <= this->GetTexture()->getSize().x)
     {
         this->m_currentPos.x += this->m_frameSize.x;
     }
@@ -188,7 +149,7 @@ void AnimSprite::CalcNextFrame()
     {
         this->m_currentPos.x = 0;
 
-        if (this->m_currentPos.y + 2 * this->m_frameSize.y <= this->getTexture()->getSize().y)
+        if (this->m_currentPos.y + 2 * this->m_frameSize.y <= this->GetTexture()->getSize().y)
         {
             this->m_currentPos.y += this->m_frameSize.y;
         }
@@ -198,19 +159,16 @@ void AnimSprite::CalcNextFrame()
         }
     }
 
-    this->setTextureRect(sf::IntRect(this->m_currentPos, this->m_frameSize));
+    this->SetTextureRect(sf::IntRect(this->m_currentPos, this->m_frameSize));
 }
 
-//static
-SpriteManager* AnimSprite::s_spriteManager = 0;
-TextureManager* AnimSprite::s_textureManager = 0;
-
-void AnimSprite::SetSpriteManager(SpriteManager* spriteManager)
+void AnimSprite::Draw(sf::RenderTarget* target)
 {
-    s_spriteManager = spriteManager;
-}
-
-void AnimSprite::SetTextureManager(TextureManager* textureManager)
-{
-    s_textureManager = textureManager;
+    this->Update();
+    sf::RenderStates states;
+    states.blendMode = sf::BlendAlpha;
+    states.shader = 0;
+    states.transform *= getTransform();
+    states.texture = m_texture;
+    target->draw(m_vertices, 4, sf::Quads, states);
 }

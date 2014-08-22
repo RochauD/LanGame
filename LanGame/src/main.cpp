@@ -37,7 +37,7 @@ int main()
         }
 
         window.clear();
-        mySpManager.DrawSprites();
+        mySpManager.Draw();
         window.display();
     }
 

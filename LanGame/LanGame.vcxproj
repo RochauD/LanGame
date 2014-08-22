@@ -156,16 +156,16 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Racket.cpp" />
-    <ClCompile Include="src\SpriteManager.cpp" />
     <ClCompile Include="src\BaseSprite.cpp" />
+    <ClCompile Include="src\SpriteManager.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AnimSprite.h" />
+    <ClInclude Include="src\BaseSprite.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Racket.h" />
     <ClInclude Include="src\SpriteManager.h" />
-    <ClInclude Include="src\BaseSprite.h" />
     <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

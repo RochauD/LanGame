@@ -5,10 +5,12 @@
 #include <SFML\System.hpp>
 #include <SFML\Graphics.hpp>
 
+#include "BaseSprite.h"
+
 class SpriteManager;
 class TextureManager;
 
-class AnimSprite : public sf::Sprite
+class AnimSprite : public BaseSprite
 {
     public:
         AnimSprite();
@@ -30,21 +32,11 @@ class AnimSprite : public sf::Sprite
         void SetUpdateTime(const sf::Time updateTime);
         void SetFramesGrid(const int framesPerRow, const int framesPerColumn);
 
-        std::string GetTextureName();
-        void SetTextureName(const std::string &textureName);
-        void Show(bool showFlag = true);
-        void SetTexture(std::string &filename);
-        void setTexture(const sf::Texture &texture, bool resetRect = false) = delete;
-
-        //static
-        static void SetSpriteManager(SpriteManager* spriteManager);
-        static void SetTextureManager(TextureManager* textureManager);
+        virtual void AnimSprite::Draw(sf::RenderTarget* target);
 
     private:
         void CalcNextFrame();
 
-        std::string m_textureName;
-        bool m_visibilityFlag;
         sf::Clock m_timer;
         sf::Time m_updateTime;
         bool m_isLooped;
@@ -55,10 +47,6 @@ class AnimSprite : public sf::Sprite
         int m_currentFrame;
         int m_columns;
         int m_rows;
-
-        //static
-        static SpriteManager* s_spriteManager;
-        static TextureManager* s_textureManager;
 };
 
 #endif
