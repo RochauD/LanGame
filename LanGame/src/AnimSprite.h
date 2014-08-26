@@ -13,7 +13,6 @@ class TextureManager;
 class AnimSprite : public BaseSprite
 {
     public:
-        AnimSprite();
         AnimSprite(const std::string filename, bool show = true, const int framesPerRow = 1, const int framesPerColumn = 1, const sf::Time updateTime = sf::seconds(1.0f), bool paused = true, bool looped = false);
         ~AnimSprite();
 

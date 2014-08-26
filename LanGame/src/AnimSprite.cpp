@@ -4,21 +4,6 @@
 
 //constructors & destructors
 
-AnimSprite::AnimSprite() : BaseSprite()
-{
-    this->m_visibilityFlag = false;
-    this->m_rows = 1;
-    this->m_columns = 1;
-    this->m_updateTime = sf::seconds(1.0f);
-    this->m_maxFrames = 0;
-    this->m_currentFrame = 0;
-    this->m_frameSize = sf::Vector2i(0, 0);
-    this->m_currentPos = sf::Vector2i(0, 0);
-    this->m_isPaused = true;
-    this->m_isLooped = false;
-    this->m_timer = sf::Clock();
-}
-
 AnimSprite::AnimSprite(const std::string filename,
                        bool show,
                        const int framesPerRow,
