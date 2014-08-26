@@ -48,10 +48,10 @@ void BaseSprite::SetTexture(const std::string &filename)
     this->m_textureName = filename;
     s_textureManager->GetTexture(this->m_textureName, &bufferTexturePtr); // @todo add exception
     this->m_texture = bufferTexturePtr;
-    SetTextureRect(sf::IntRect(0, 0, this->m_texture->getSize().x, this->m_texture->getSize().y));
+	SetTextureRect(sf::Rect<unsigned int>(0, 0, this->m_texture->getSize().x, this->m_texture->getSize().y));
 }
 
-void BaseSprite::SetTextureRect(const sf::IntRect &rectangle)
+void BaseSprite::SetTextureRect(const sf::Rect<unsigned int> &rectangle)
 {
     if (rectangle != m_textureRect)
     {
@@ -74,7 +74,7 @@ const sf::Texture* BaseSprite::GetTexture() const
     return m_texture;
 }
 
-const sf::IntRect &BaseSprite::GetTextureRect() const
+const sf::Rect<unsigned int> &BaseSprite::GetTextureRect() const
 {
     return m_textureRect;
 }
@@ -86,8 +86,8 @@ const sf::Color &BaseSprite::GetColor() const
 
 sf::FloatRect BaseSprite::GetLocalBounds() const
 {
-    float width = static_cast<float>(std::abs(m_textureRect.width));
-    float height = static_cast<float>(std::abs(m_textureRect.height));
+    float width = static_cast<float>(m_textureRect.width);
+    float height = static_cast<float>(m_textureRect.height);
 
     return sf::FloatRect(0.f, 0.f, width, height);
 }

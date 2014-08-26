@@ -17,8 +17,8 @@ AnimSprite::AnimSprite(const std::string filename,
     this->m_updateTime = updateTime;
     this->m_maxFrames = 0;
     this->m_currentFrame = 0;
-    this->m_frameSize = sf::Vector2i(0, 0);
-    this->m_currentPos = sf::Vector2i(0, 0);
+    this->m_frameSize = sf::Vector2u(0, 0);
+    this->m_currentPos = sf::Vector2u(0, 0);
     this->m_isPaused = paused;
     this->m_isLooped = looped;
     this->m_timer = sf::Clock();
@@ -115,10 +115,10 @@ void AnimSprite::SetFramesGrid(const int framesPerRow, const int framesPerColumn
     this->m_rows = framesPerRow;
     this->m_columns = framesPerColumn;
     this->m_maxFrames = this->m_rows * this->m_columns;
-    this->m_frameSize = sf::Vector2i(this->GetTexture()->getSize());
+    this->m_frameSize = sf::Vector2u(this->GetTexture()->getSize());
     this->m_frameSize.x /= this->m_rows;
     this->m_frameSize.y /= this->m_columns;
-    this->SetTextureRect(sf::IntRect(sf::Vector2i(0, 0), this->m_frameSize));
+	this->SetTextureRect(sf::Rect<unsigned int>(sf::Vector2u(0, 0), this->m_frameSize));
 }
 
 
@@ -144,7 +144,7 @@ void AnimSprite::CalcNextFrame()
         }
     }
 
-    this->SetTextureRect(sf::IntRect(this->m_currentPos, this->m_frameSize));
+    this->SetTextureRect(sf::Rect<unsigned int>(this->m_currentPos, this->m_frameSize));
 }
 
 void AnimSprite::Draw(sf::RenderTarget* target)

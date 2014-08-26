@@ -40,8 +40,8 @@ class AnimSprite : public BaseSprite
         sf::Time m_updateTime;
         bool m_isLooped;
         bool m_isPaused;
-        sf::Vector2i m_currentPos;
-        sf::Vector2i m_frameSize;
+        sf::Vector2u m_currentPos;
+        sf::Vector2u m_frameSize;
         int m_maxFrames;
         int m_currentFrame;
         int m_columns;

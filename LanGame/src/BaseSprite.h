@@ -46,10 +46,10 @@ class BaseSprite : public sf::Transformable
         BaseSprite(const std::string &filename, bool show = true);
 
         void SetTexture(const std::string &filename);
-        void SetTextureRect(const sf::IntRect &rectangle);
+        void SetTextureRect(const sf::Rect<unsigned int> &rectangle);
         void SetColor(const sf::Color &color);
         const sf::Texture* GetTexture() const;
-        const sf::IntRect &GetTextureRect() const;
+		const sf::Rect<unsigned int> &GetTextureRect() const;
         const sf::Color &GetColor() const;
 
         sf::FloatRect GetLocalBounds() const;
@@ -72,7 +72,7 @@ class BaseSprite : public sf::Transformable
 
         sf::Vertex m_vertices[4];
         const sf::Texture* m_texture;
-        sf::IntRect m_textureRect;
+		sf::Rect<unsigned int> m_textureRect;
         std::string m_textureName;
         bool m_visibilityFlag;
 
