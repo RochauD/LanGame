@@ -55,7 +55,7 @@ class BaseSprite : public sf::Transformable
         sf::FloatRect GetLocalBounds() const;
         sf::FloatRect GetGlobalBounds() const;
 
-        virtual void BaseSprite::Draw(sf::RenderTarget* target);
+        virtual void Draw(sf::RenderTarget* target);
 
         std::string GetTextureName();
         void SetTextureName(const std::string &textureName);
